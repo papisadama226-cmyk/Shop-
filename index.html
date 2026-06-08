@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-D Shop 👿</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#ff4500">
+</head>
+<body>
+
+    <!-- ÉCRAN DE BLOCAGE (PERMISSION DISCORD) -->
+    <div id="auth-gate" class="screen">
+        <div class="auth-box">
+            <h2>Accès Restreint 👿</h2>
+            <p>Pour accéder à cette boutique 225, tu dois faire partie du serveur Discord officiel.</p>
+            <!-- Remplace par ton lien de connexion OAuth2 Discord plus tard -->
+            <button id="login-discord" class="btn-discord">Se connecter avec Discord</button>
+        </div>
+    </div>
+
+    <!-- ÉCRAN PRINCIPAL DE LA BOUTIQUE (Masqué par défaut tant que pas connecté) -->
+    <div id="shop-screen" class="screen hidden">
+        <header>
+            <h1>N-D Shop 🇨🇮</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </header>
+
+        <main class="products-grid">
+            <!-- Exemple d'article à 10k -->
+            <div class="product-card">
+                <div class="product-img">📦</div>
+                <h3>Article Premium</h3>
+                <p class="price">10 000 FCFA</p>
+                <button class="btn-add" onclick="addToCart('Article Premium')">Ajouter au panier</button>
+            </div>
+        </main>
+
+        <!-- PANIER FLOTTANT -->
+        <div id="cart-sidebar" class="cart-sidebar hidden">
+            <h3>Mon Panier</h3>
+            <div id="cart-items"></div>
+            <div class="cart-total">Total: <span id="total-price">0</span> FCFA</div>
+            <button class="btn-checkout" onclick="checkout()">Commander via WhatsApp</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Enregistrement du Service Worker pour la PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('PWA N-D_bot opérationnelle !'))
+                .catch((err) => console.log('Erreur PWA:', err));
+        }
+    </script>
+</body>
+</html>
